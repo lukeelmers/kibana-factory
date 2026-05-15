@@ -24,6 +24,7 @@ imports:
   - .github/aw/kibana-agent/imports/network-review.md
   - .github/aw/kibana-agent/imports/safe-outputs-pr.md
   - .github/aw/kibana-agent/imports/safe-outputs-comment.md
+  - .github/aw/kibana-agent/imports/safe-outputs-app.md
 
 engine:
   id: claude
@@ -92,7 +93,7 @@ Personas are **independent**: use only the diff, the approved spec when availabl
 
 - Use the GitHub MCP tools to read the PR diff and changed file list (e.g. `get_pull_request_diff`, `get_pull_request_files`).
 - Read the PR description via `get_pull_request` or `pull_request_read` for context.
-- If the PR references a source issue, read the issue and find the latest **kibana-agent**-authored comment that contains the **approved spec**. That spec anchors what the PR should accomplish. If no spec is found, proceed with a general correctness review based on the diff and PR description alone.
+- If the PR references a source issue, read the issue and find the latest **`kibana-agent[bot]`**-authored comment that contains the **approved spec**. That spec anchors what the PR should accomplish. If no spec is found, proceed with a general correctness review based on the diff and PR description alone.
 - Gather deterministic signals where available:
   - Check CI status via `get_pull_request_status` or workflow run APIs.
   - Review lint or type-check output in check logs when present.

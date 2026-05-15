@@ -24,6 +24,7 @@ imports:
   - .github/aw/kibana-agent/imports/network-review.md
   - .github/aw/kibana-agent/imports/safe-outputs-pr.md
   - .github/aw/kibana-agent/imports/safe-outputs-comment.md
+  - .github/aw/kibana-agent/imports/safe-outputs-app.md
 
 engine:
   id: claude
@@ -90,7 +91,7 @@ If **any** of the following holds, call **`noop`** and stop — do **not** call 
 2. Fetch **PR review / issue comments** and locate the **latest** top-level comment that:
    - Contains a **`### Findings`** section, and
    - Matches the **review template** produced by the kibana-agent review workflow (e.g. a `## Review —` heading and structured summary / auto-fixed / findings / verdict sections), and
-   - Is authored by the **same GitHub identity** kibana-agent uses for review posts (the bot or app account that publishes synthesized reviews).
+   - Is authored by **`kibana-agent[bot]`**.
 3. If **no** such comment exists, post **one** **`add_comment`** explaining that no numbered review findings were found, then stop.
 
 ### Parsing findings

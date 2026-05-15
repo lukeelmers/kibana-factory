@@ -24,6 +24,7 @@ imports:
   - .github/aw/kibana-agent/imports/network-review.md
   - .github/aw/kibana-agent/imports/safe-outputs-pr.md
   - .github/aw/kibana-agent/imports/safe-outputs-comment.md
+  - .github/aw/kibana-agent/imports/safe-outputs-app.md
 
 engine:
   id: claude
@@ -66,7 +67,7 @@ You produce **one synthesized spec comment** via **`add_comment`**. All work bel
 
 **Before any drafting or repo research:**
 
-1. **Assignment** — The issue must be **assigned** to the **kibana-agent** handle (the bot or automation account used for agent workflows). If the triggering event is `opened` or `labeled` without assignment to **kibana-agent**, **do not** post a spec comment; stop without using **`add_comment`**.
+1. **Assignment** — The issue must be **assigned** to **kibana-agent** (the `kibana-agent[bot]` App account). If the triggering event is `opened` or `labeled` without assignment to **kibana-agent**, **do not** post a spec comment; stop without using **`add_comment`**.
 2. **Trusted actor** — Confirm the activation is attributable to a **trusted** actor: a user with **write** access (or equivalent collaborator role) to the repository, per imported **trusted-user-gating** behavior. If you cannot verify trust from activation context, **do not** post a spec comment; stop.
 
 If either gate fails, exit silently unless the host platform requires a no-op completion signal—never leak partial specs.
