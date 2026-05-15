@@ -89,7 +89,7 @@ If triggered manually, resolve the target PR from the activation context or `aw_
 Before proceeding, confirm the PR:
 
 - Is **open** (not closed or merged).
-- Was authored by **`kibana-agent[bot]`** or is on a bot-owned branch (prefix `agent/`).
+- Was authored by **`kibana-agent`** or is on an agent-owned branch (prefix `agent/`).
 - Targets a branch this workflow is configured to operate on.
 
 If any check fails, call **`noop`** and stop.
@@ -126,7 +126,7 @@ Classify each distinct failure into **exactly one** category:
 Determine how many prior fix iterations have occurred on this PR and whether progress is being made.
 
 1. **Count previous iterations.** Query the workflow run history for this workflow on the current PR's head branch. Each completed run of the CI fix loop (regardless of outcome) counts as one iteration.
-2. **Collect error patterns from prior runs.** Read any previous **`kibana-agent[bot]`** status comments on the PR that follow the format from §10. Extract the **failure category** and **pattern signature** from each.
+2. **Collect error patterns from prior runs.** Read any previous **`kibana-agent`** status comments on the PR that follow the format from §10. Extract the **failure category** and **pattern signature** from each.
 3. **Detect repeated failures.** Compare the current failure's category and pattern signature against the collected history. A failure is **repeated** if the same category and substantially similar error pattern appeared in a prior iteration without an intervening successful CI run.
 
 **Escalation thresholds** — see §11 for actions when thresholds are met:
