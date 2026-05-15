@@ -28,7 +28,7 @@ imports:
   - .github/aw/kibana-agent/imports/network-review.md
   - .github/aw/kibana-agent/imports/safe-outputs-pr.md
   - .github/aw/kibana-agent/imports/safe-outputs-comment.md
-  - .github/aw/kibana-agent/imports/safe-outputs-app.md
+  - .github/aw/kibana-agent/imports/safe-outputs-identity.md
 
 engine:
   id: claude
