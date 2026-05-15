@@ -6,6 +6,10 @@ on:
   issue_comment:
     types: [created]
 
+if: >
+  github.event_name == 'workflow_dispatch' ||
+  (!github.event.issue.pull_request && contains(github.event.comment.body, '@kibana-agent'))
+
 permissions:
   contents: read
   issues: read

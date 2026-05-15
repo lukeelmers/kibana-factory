@@ -6,6 +6,10 @@ on:
   issues:
     types: [opened, labeled, assigned]
 
+if: >
+  github.event_name == 'workflow_dispatch' ||
+  (github.event.action == 'assigned' && github.event.assignee.login == 'kibana-agent')
+
 permissions:
   contents: read
   issues: read

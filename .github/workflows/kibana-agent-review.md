@@ -6,6 +6,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+if: >
+  github.event_name == 'workflow_dispatch' ||
+  startsWith(github.event.pull_request.head.ref, 'agent/')
+
 permissions:
   contents: read
   issues: read
