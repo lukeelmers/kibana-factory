@@ -56,7 +56,7 @@ safe-outputs:
     max: 1
   add-comment:
     max: 1
-    target: "*"
+    target: "triggering"
     hide-older-comments: true
 
 strict: true
