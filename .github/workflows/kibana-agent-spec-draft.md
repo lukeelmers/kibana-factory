@@ -181,8 +181,6 @@ Combine **§4.1**, **§4.3**, and **§4.2** into **one** comment body. **Do not*
 - ...
 
 </details>
-
-Let me know if this looks good or if you'd like any changes before I get started.
 ```
 
 ### 5.1 Synthesis rules
@@ -195,13 +193,13 @@ Let me know if this looks good or if you'd like any changes before I get started
 - **Affected Areas** (inside `<details>`) — **Package IDs** and **paths** discovered during **§4.2**; omit vague areas without paths.
 - **Test Strategy** — **Testing pyramid**: unit **>** integration **>** e2e. Prefer **Scout** for new e2e. Name what to **add** vs what to **run** (`node scripts/check`, targeted Jest, etc.) when clear from context.
 - **Code references** — When referencing specific files or lines of code in the visible comment, use full **GitHub permalink URLs** rather than bare file paths (e.g. `https://github.com/elastic/kibana/blob/<sha>/path/to/file.ts#L42-L55`). GitHub renders these as embedded code snippets when specific lines are referenced, or as live links to the file. Construct these from the repository URL and HEAD commit SHA gathered during research.
-- **Closing** — End the spec with a short conversational line inviting the human to respond with feedback or approval. Keep it natural — one sentence (the template’s closing line is the default).
+- **Closing** — End the spec with a short conversational line inviting the human to respond with feedback or approval. Vary the wording naturally each time — do not use a fixed phrase.
 
 The spec must be **approval-ready**: a human can say **proceed** or request edits without first reverse-engineering the issue.
 
 ## 6. Comment hygiene
 
-- Post **exactly one** comment using **`add_comment`** (this workflow’s safe output already sets **`hide-older-comments: true`** so reruns replace prior drafts).
+- Post **exactly one** comment using **`add_comment`** (this workflow’s safe output already sets **`hide-older-comments: true`** so reruns replace prior drafts). Include the **issue number** as `item_number` in the **`add_comment`** call. Include the **issue number** as `item_number` in the **`add_comment`** call.
 - **Never** include internal persona outputs verbatim in the comment.
 - **Never** reference operational artifact paths under **`/tmp/gh-aw/agent/personas/`** in the issue comment.
 

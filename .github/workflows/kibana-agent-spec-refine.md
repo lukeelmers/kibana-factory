@@ -174,8 +174,6 @@ Use this structure for refinement posts (and for the body under the approval hea
 - ...
 
 </details>
-
-Let me know if this looks good or if you'd like any changes before I get started.
 ```
 
 For **approval** (**§6**), the heading line is **`## Spec (approved)`** instead of **`## Spec`**; all following sections match the template.
