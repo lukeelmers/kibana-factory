@@ -20,6 +20,7 @@ permissions:
 
 imports:
   - .github/aw/kibana-agent/imports/common.md
+  - .github/aw/kibana-agent/imports/voice.md
   - .github/aw/kibana-agent/imports/trusted-user-gating.md
   - .github/aw/kibana-agent/imports/comment-routing.md
   - .github/aw/kibana-agent/imports/engine-provider.md
