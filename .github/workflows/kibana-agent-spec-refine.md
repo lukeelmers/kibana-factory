@@ -53,7 +53,7 @@ safe-outputs:
     enabled: true
   add-comment:
     max: 1
-    target: "*"
+    target: "triggering"
     hide-older-comments: true
 
 strict: true
@@ -121,7 +121,7 @@ When summarizing what changed, **explicitly** call out whether each substantive 
 ## 5. Refinement behavior
 
 1. Merge the feedback and intervening context into an **updated** spec.
-2. Post **exactly one** **`add_comment`** that is the **full** spec text — **never** a delta, partial section, or appendix only.
+2. Post **exactly one** **`add_comment`** that is the **full** spec text — **never** a delta, partial section, or appendix only. Include the **issue number** as `item_number` in every **`add_comment`** call; resolve it from the triggering comment’s context. Include the **issue number** as `item_number` in every **`add_comment`** call; resolve it from the triggering comment’s context.
 3. Use the **same** template as **§7**.
 4. If the prior spec used **`## Spec (approved)`** (with the approval marker), drop **`(approved)`** in the new revision unless you are executing **§6** in the same run (approval is its own command). Refined specs use **`## Spec`** until a new **`proceed`**.
 5. **`hide-older-comments`** is **true** — your post **replaces** the previous spec in the thread for readers; the new comment is the **only** current spec version.
@@ -132,7 +132,7 @@ If you are **blocked** (contradictory requirements across comments, missing repo
 
 1. Confirm a **spec comment** exists (**§3**). If not, use the **no spec** path from **§3** (one explanatory comment).
 2. **Do not** post a separate short “approved” message — that would interact badly with **`hide-older-comments`** and **`max: 1`**.
-3. Post **one** **`add_comment`** containing the **same substantive spec content** as the latest spec (Summary through **Details**, unchanged unless you must fix obvious formatting breakage). Change **only** the **heading** line to:
+3. Post **one** **`add_comment`** containing the **same substantive spec content** as the latest spec (Summary through **Details**, unchanged unless you must fix obvious formatting breakage). Include the **issue number** as `item_number` in every **`add_comment`** call; resolve it from the triggering comment’s context. Change **only** the **heading** line to:
 
    **`## Spec (approved)`**
 

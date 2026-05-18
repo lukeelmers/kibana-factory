@@ -53,7 +53,7 @@ safe-outputs:
     enabled: true
   add-comment:
     max: 1
-    target: "*"
+    target: "triggering"
     hide-older-comments: true
 
 strict: true
@@ -199,7 +199,7 @@ The spec must be **approval-ready**: a human can say **proceed** or request edit
 
 ## 6. Comment hygiene
 
-- Post **exactly one** comment using **`add_comment`** (this workflow’s safe output already sets **`hide-older-comments: true`** so reruns replace prior drafts). Include the **issue number** as `item_number` in the **`add_comment`** call. Include the **issue number** as `item_number` in the **`add_comment`** call.
+- Post **exactly one** comment using **`add_comment`** (this workflow’s safe output already sets **`hide-older-comments: true`** so reruns replace prior drafts).
 - **Never** include internal persona outputs verbatim in the comment.
 - **Never** reference operational artifact paths under **`/tmp/gh-aw/agent/personas/`** in the issue comment.
 
