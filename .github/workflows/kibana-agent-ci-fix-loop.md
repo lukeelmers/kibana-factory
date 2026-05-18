@@ -222,7 +222,7 @@ If a CI failure can only be resolved by changing protected files, escalate per Â
 After applying fixes and passing local validation:
 
 1. Use **`push_to_pull_request_branch`** to push the fix commit(s) to the PR head branch.
-2. Post **one** status comment via **`add_comment`** using this format:
+2. Post **one** status comment via **`add_comment`** using this format (include the **PR number** as `item_number` in the **`add_comment`** call):
 
 ```markdown
 ## CI Fix â€” iteration N

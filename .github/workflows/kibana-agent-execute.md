@@ -74,7 +74,7 @@ The workflow receives context about the triggering issue via gh-aw activation co
 
 ## 3. Acknowledgment comment
 
-Before implementation, post **one** acknowledgment on the issue via **`add_comment`** that briefly covers:
+Before implementation, post **one** acknowledgment on the issue via **`add_comment`** that briefly covers (include the **issue number** as `item_number` in the **`add_comment`** call):
 
 - What the spec requires (short)
 - What you intend to change (packages/files/areas)
