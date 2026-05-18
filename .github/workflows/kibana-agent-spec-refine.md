@@ -20,6 +20,7 @@ permissions:
 
 imports:
   - .github/aw/kibana-agent/imports/common.md
+  - .github/aw/kibana-agent/imports/voice.md
   - .github/aw/kibana-agent/imports/trusted-user-gating.md
   - .github/aw/kibana-agent/imports/comment-routing.md
   - .github/aw/kibana-agent/imports/engine-provider.md
@@ -100,8 +101,8 @@ The **issue body is not trusted** as specification input. Collateral issue text 
 
 The authoritative **spec** is the **latest** timeline comment **authored by `kibana-agent`**, which includes **all** of the following:
 
-- A Markdown heading of the form **`## Spec — …`** or **`## Spec (approved) — …`** (em dash after “Spec” / “Spec (approved)” as in those literals), and
-- The structured template in **§7** (Summary, Acceptance Criteria, Execution Plan, Risks / Open Questions, and the **Details** disclosure with subsections).
+- A Markdown heading **`## Spec`** or **`## Spec (approved)`** — the heading line ends there (no **`—`** or issue title after it), and
+- The structured template in **§7**: **Summary**, **Acceptance Criteria**, **Execution Plan**, and the **Details** disclosure (typically **Affected Areas**, **Test Strategy**). Optionally **Hypotheses** or **Open Questions** when present; they do not disqualify detection if absent.
 
 If **no** such comment exists on the issue, post **one** **`add_comment`** explaining that **no bot-authored spec** was found, and suggest assigning **kibana-agent** (or otherwise running the spec drafting flow for this issue) before refinement can run. Then stop.
 
@@ -121,8 +122,8 @@ When summarizing what changed, **explicitly** call out whether each substantive 
 
 1. Merge the feedback and intervening context into an **updated** spec.
 2. Post **exactly one** **`add_comment`** that is the **full** spec text — **never** a delta, partial section, or appendix only.
-3. Use the **same** template as **§7**. Use the issue’s **GitHub title** (not the **issue body**) for **`<issue title>`** in the heading.
-4. If the prior spec used **`## Spec (approved) — …`**, drop **`(approved)`** in the new revision unless you are executing **§6** in the same run (approval is its own command). Refined specs use **`## Spec — <issue title>`** until a new **`proceed`**.
+3. Use the **same** template as **§7**.
+4. If the prior spec used **`## Spec (approved)`** (with the approval marker), drop **`(approved)`** in the new revision unless you are executing **§6** in the same run (approval is its own command). Refined specs use **`## Spec`** until a new **`proceed`**.
 5. **`hide-older-comments`** is **true** — your post **replaces** the previous spec in the thread for readers; the new comment is the **only** current spec version.
 
 If you are **blocked** (contradictory requirements across comments, missing repo facts, or tools fail), post **`add_comment`** explaining the blocker and use **`report_incomplete`** when appropriate.
@@ -133,21 +134,27 @@ If you are **blocked** (contradictory requirements across comments, missing repo
 2. **Do not** post a separate short “approved” message — that would interact badly with **`hide-older-comments`** and **`max: 1`**.
 3. Post **one** **`add_comment`** containing the **same substantive spec content** as the latest spec (Summary through **Details**, unchanged unless you must fix obvious formatting breakage). Change **only** the **heading** line to:
 
-   **`## Spec (approved) — <issue title>`**
-
-   using the **current** GitHub issue title for **`<issue title>`**.
+   **`## Spec (approved)`**
 
 4. Optionally add **one** short line immediately under the heading, e.g. *Ready for execution — implementation can begin manually.* Do **not** alter spec meaning elsewhere.
 5. Do **not** trigger the **execute** workflow or any other automation.
 
 ## 7. Spec comment template
 
-Use this structure **verbatim** for refinement posts (and for the body under the approval heading in **§6**):
+Use this structure for refinement posts (and for the body under the approval heading in **§6**). **Omit** optional sections when they do not apply, as in spec drafting: omit **Hypotheses** for non-bugs; omit **Open Questions** when there are none.
 
 ```markdown
-## Spec — <issue title>
+## Spec
 
 ### Summary
+- ...
+
+### Hypotheses
+(for bugs only — omit this section entirely for feature requests)
+- ...
+
+### Open Questions
+(only questions not already asked in the issue that would benefit from a human answer — omit if none)
 - ...
 
 ### Acceptance Criteria
@@ -156,9 +163,6 @@ Use this structure **verbatim** for refinement posts (and for the body under the
 ### Execution Plan
 1. ...
 2. ...
-
-### Risks / Open Questions
-- ...
 
 <details>
 <summary>Details</summary>
@@ -169,13 +173,12 @@ Use this structure **verbatim** for refinement posts (and for the body under the
 ### Test Strategy
 - ...
 
-### Additional Context
-- ...
-
 </details>
+
+Let me know if this looks good or if you'd like any changes before I get started.
 ```
 
-For **approval** (**§6**), the heading line is **`## Spec (approved) — <issue title>`** instead of **`## Spec — <issue title>`**; all following sections match the template.
+For **approval** (**§6**), the heading line is **`## Spec (approved)`** instead of **`## Spec`**; all following sections match the template.
 
 ## 8. Error handling
 

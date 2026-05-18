@@ -20,6 +20,7 @@ permissions:
 
 imports:
   - .github/aw/kibana-agent/imports/common.md
+  - .github/aw/kibana-agent/imports/voice.md
   - .github/aw/kibana-agent/imports/trusted-user-gating.md
   - .github/aw/kibana-agent/imports/comment-routing.md
   - .github/aw/kibana-agent/imports/engine-provider.md
@@ -86,10 +87,13 @@ For **each** persona pass:
 - Read the persona file and apply its **evaluation criteria** to the diff and gathered context.
 - For **each** issue, classify **auto-fix** vs **decision-tier** using that persona’s **severity guidance**.
 - Record **evidence**: file paths, line ranges, and the specific code or behavior — not vague advice.
+- After completing the pass, write the internal findings to **`/tmp/gh-aw/agent/personas/<persona-slug>-findings.md`**, mapping each persona filename to **`reviewer-architecture`**, **`reviewer-code-quality`**, **`reviewer-test-strategy`**, or **`reviewer-kibana-conventions`** (e.g. `reviewer-architecture-findings.md`).
+
+Files under **`/tmp/gh-aw/agent/personas/`** are **operational artifacts only** — they are collected automatically by the workflow infrastructure for debugging and quality review. **Never** reference them in PR comments.
 
 Personas are **independent**: use only the diff, the approved spec when available, the PR description, issue context, and deterministic signals. Do **not** use other personas’ drafted text as input to a persona pass (no cross-persona leakage). After all four passes, collect the full internal finding list for synthesis.
 
-**Synthesis** — Apply `.agents/personas/synthesizer.md`: deduplicate overlapping findings, rank by severity and impact, map to public **category** labels, and produce exactly **one** comment body. **Never** put persona names or `.agents/personas/` paths in the posted comment.
+**Synthesis** — Apply `.agents/personas/synthesizer.md`: deduplicate overlapping findings, rank by severity and impact, map to public **category** labels, and produce exactly **one** comment body. Before deduplicating and ranking, write the merged finding list **as collected from all personas** (pre-synthesis) to **`/tmp/gh-aw/agent/personas/synthesizer-input.md`**. **Never** put persona names or `.agents/personas/` paths in the posted comment.
 
 **Public category labels** (for findings only): **`Scope`**, **`Quality`**, **`Conventions`**, **`Tests`**. These replace internal persona names in the visible output.
 
@@ -97,7 +101,7 @@ Personas are **independent**: use only the diff, the approved spec when availabl
 
 - Use the GitHub MCP tools to read the PR diff and changed file list (e.g. `get_pull_request_diff`, `get_pull_request_files`).
 - Read the PR description via `get_pull_request` or `pull_request_read` for context.
-- If the PR references a source issue, read the issue and find the latest **`kibana-agent`**-authored comment that contains the **approved spec**. That spec anchors what the PR should accomplish. If no spec is found, proceed with a general correctness review based on the diff and PR description alone.
+- If the PR references a source issue, read the issue and find the latest **`kibana-agent`**-authored comment that contains **`## Spec (approved)`**. That spec anchors what the PR should accomplish. If no such spec comment is found, proceed with a general correctness review based on the diff and PR description alone.
 - Gather deterministic signals where available:
   - Check CI status via `get_pull_request_status` or workflow run APIs.
   - Review lint or type-check output in check logs when present.
@@ -121,8 +125,8 @@ Post **one** synthesized comment via the **`add_comment`** safe output, using th
 - <list of mechanical fixes applied, or "None">
 
 ### Findings
-1. **[Category]** <what is wrong and what the human should do about it> — `path/to/file.ts:L42`
-2. **[Category]** <what is wrong and what the human should do about it> — `path/to/file.ts:L88`
+1. **[Category]** <what is wrong and what the human should do about it> — `https://github.com/elastic/kibana/blob/<sha>/path/to/file.ts#L42`
+2. **[Category]** <what is wrong and what the human should do about it> — `https://github.com/elastic/kibana/blob/<sha>/path/to/file.ts#L88`
 ...
 
 To address a specific finding: `@kibana-agent fix <number>`
@@ -140,12 +144,13 @@ Each decision-tier finding must be **actionable** — a human reading it should 
 - **State what is wrong**, citing a specific file, line range, or symbol.
 - **State what the human needs to decide or do.** "Consider whether X" is not actionable; "Choose between X (tradeoff A) and Y (tradeoff B)" is.
 - **Do not pad findings.** If the only issues are mechanical and were auto-fixed, say so in the summary and omit the Findings section. An empty findings list is a good outcome.
+- When citing files or line ranges, use **GitHub permalink URLs** (e.g. `https://github.com/elastic/kibana/blob/<sha>/path/to/file.ts#L42`) so findings link directly to the code in question.
 
 ## 6. Reviewer independence
 
 Ground the review in the **diff**, the **approved spec** (when available), and **deterministic signals** (CI, logs).
 
-Do **not** seek or use internal chain-of-thought, planning artifacts, or hidden rationale from an execution workflow. You are an **independent** reviewer.
+Do **not** seek or use internal chain-of-thought, planning artifacts, or hidden rationale from an execution workflow; do **not** reference paths under **`/tmp/gh-aw/agent/personas/`** in PR comments. You are an **independent** reviewer.
 
 ## 7. Error handling
 
