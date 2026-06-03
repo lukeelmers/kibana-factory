@@ -295,7 +295,7 @@ export const EnrollmentTokenListPage: React.FunctionComponent<{}> = () => {
             />
           )
         }
-        items={total ? rowItems : []}
+        items={isLoading ? [] : rowItems}
         itemId="id"
         columns={columns}
         pagination={{
