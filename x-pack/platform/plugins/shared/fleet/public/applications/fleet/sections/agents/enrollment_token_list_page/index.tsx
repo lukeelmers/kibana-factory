@@ -129,8 +129,10 @@ export const EnrollmentTokenListPage: React.FunctionComponent<{}> = () => {
     enrollmentAPIKeysRequest?.data?.items.filter((enrollmentKey) => {
       if (!agentPolicies.length || !enrollmentKey.policy_id) return false;
       const agentPolicy = agentPoliciesById[enrollmentKey.policy_id];
-      // Filter legacy enrollment api keys without the hidden flag
-      return !agentPolicy?.is_managed && !agentPolicy?.supports_agentless;
+      // Hide tokens whose agent policy is not found (e.g. Cloud policy the user lacks access to),
+      // as well as managed/agentless policies.
+      if (!agentPolicy) return false;
+      return !agentPolicy.is_managed && !agentPolicy.supports_agentless;
     }) || [];
 
   const columns = [
