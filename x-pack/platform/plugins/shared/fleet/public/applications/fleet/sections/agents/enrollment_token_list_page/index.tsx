@@ -126,12 +126,14 @@ export const EnrollmentTokenListPage: React.FunctionComponent<{}> = () => {
 
   const total = enrollmentAPIKeysRequest?.data?.total ?? 0;
   const rowItems =
-    enrollmentAPIKeysRequest?.data?.items.filter((enrollmentKey) => {
-      if (!agentPolicies.length || !enrollmentKey.policy_id) return false;
-      const agentPolicy = agentPoliciesById[enrollmentKey.policy_id];
-      // Filter legacy enrollment api keys without the hidden flag
-      return !agentPolicy?.is_managed && !agentPolicy?.supports_agentless;
-    }) || [];
+    agentPolicies.length > 0
+      ? enrollmentAPIKeysRequest?.data?.items.filter((enrollmentKey) => {
+          if (!enrollmentKey.policy_id) return false;
+          const agentPolicy = agentPoliciesById[enrollmentKey.policy_id];
+          // Filter legacy enrollment api keys without the hidden flag
+          return !agentPolicy?.is_managed && !agentPolicy?.supports_agentless;
+        }) || []
+      : [];
 
   const columns = [
     {
@@ -222,7 +224,7 @@ export const EnrollmentTokenListPage: React.FunctionComponent<{}> = () => {
 
   const isLoading =
     enrollmentAPIKeysRequest.isInitialLoading ||
-    (agentPoliciesRequest.isLoading && agentPoliciesRequest.isInitialRequest);
+    (agentPoliciesRequest.isLoading && !agentPoliciesRequest.data);
 
   return (
     <DefaultLayout section="enrollment_tokens">
