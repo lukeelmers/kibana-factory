@@ -221,8 +221,7 @@ export const EnrollmentTokenListPage: React.FunctionComponent<{}> = () => {
   ];
 
   const isLoading =
-    enrollmentAPIKeysRequest.isInitialLoading ||
-    (agentPoliciesRequest.isLoading && agentPoliciesRequest.isInitialRequest);
+    enrollmentAPIKeysRequest.isInitialLoading || agentPoliciesRequest.isLoading;
 
   return (
     <DefaultLayout section="enrollment_tokens">
